@@ -2,6 +2,9 @@ version: '3.8'
 services:
   chrome:
     image: chrome-docker
+    build:
+      context: .
+      dockerfile: Dockerfile.chrome
     environment:
       - DISPLAY=:99
       - XDG_RUNTIME_DIR=/tmp
