@@ -1,6 +1,11 @@
 FROM ubuntu:20.04
 
+# Set non-interactive frontend for debconf
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Set timezone (e.g., UTC)
 RUN apt-get update && apt-get install -y \
+    tzdata \
     gnupg \
     xvfb \
     x11vnc \
@@ -19,6 +24,9 @@ RUN apt-get update && apt-get install -y \
     wget \
     sudo \
     git \
+    && ln -fs /usr/share/zoneinfo/UTC /etc/localtime \
+    && dpkg-reconfigure -f noninteractive tzdata \
+    && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
 RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
