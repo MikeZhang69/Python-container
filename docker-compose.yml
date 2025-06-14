@@ -15,12 +15,10 @@ services:
     command: >
       sh -c "mkdir -p /var/run/dbus && Xvfb :99 -screen 0 1280x720x24 -nolisten tcp & 
              x11vnc -display :99 -forever -nopw -rfbport 5900 -verbose -shared &
-             google-chrome --no-sandbox --disable-gpu --disable-software-rasterizer --disable-dev-shm-usage --disable-accelerated-2d-canvas --disable-accelerated-jpeg-decoding --disable-accelerated-mjpeg-decode --disable-accelerated-video-decode --no-first-run --headless=new")
+             google-chrome --no-sandbox --disable-gpu --disable-software-rasterizer --disable-dev-shm-usage --disable-accelerated-2d-canvas --disable-accelerated-jpeg-decoding --disable-accelerated-mjpeg-decode --disable-accelerated-video-decode --no-first-run --headless=new"
     shm_size: '512m'
   novnc:
     image: theasp/novnc:latest
-    ports:
-      - "6080:6080"
     environment:
       - VNC_SERVER=127.0.0.1:5900
       - RESOLUTION=1280x720
