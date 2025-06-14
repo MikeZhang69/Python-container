@@ -1,0 +1,20 @@
+{
+    "name": "Chrome Docker Codespace",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "runArgs": [
+        "--privileged",
+        "--volume=/var/run/docker.sock:/var/run/docker.sock"
+    ],
+    "features": {
+        "docker-in-docker": "latest"
+    },
+    "forwardPorts": [5900, 6080],
+    "postCreateCommand": "docker-compose up -d",
+    "customizations": {
+        "vscode": {
+            "extensions": ["ms-vscode-remote.remote-containers"]
+        }
+    }
+}

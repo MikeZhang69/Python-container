@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  chrome:
+    image: chrome-docker
+    build:
+      context: .
+      dockerfile: Dockerfile.chrome
+    environment:
+      - DISPLAY=:99
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    network_mode: host
+    command: >
+      sh -c "Xvfb :99 -screen 0 1280x720x24 & 
+             x11vnc -display :99 -forever -nopw &
+             google-chrome --no-sandbox --disable-gpu"
