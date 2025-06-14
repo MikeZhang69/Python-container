@@ -1,0 +1,31 @@
+FROM ubuntu:20.04
+
+RUN apt-get update && apt-get install -y \
+    gnupg \
+    xvfb \
+    x11vnc \
+    x11-xkb-utils \
+    xfonts-100dpi \
+    xfonts-75dpi \
+    xfonts-scalable \
+    xfonts-cyrillic \
+    x11-apps \
+    clang \
+    libglib2.0-0 \
+    libnss3 \
+    libgconf-2-4 \
+    libfontconfig1 \
+    libxrender1 \
+    wget \
+    sudo \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
+    && echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list \
+    && apt-get update \
+    && apt-get install -y google-chrome-stable \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+CMD ["bash"]
