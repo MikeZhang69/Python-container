@@ -1,10 +1,12 @@
-from google import genai
+# !pip install google-ai-generativelanguage
+import google.generativeai as genai
 
-client = genai.Client(api_key="YOUR_API_KEY")
+genai.configure(api_key="AIzaSyDEp7vlPj0Zwsd_5asY9BLDRF_TbkzI9Ic")
 
-response = client.models.generate_content(
-    model="gemini-2.0-flash",
-    contents="Explain how AI works in a few words",
-)
+# Initialize the model
+model = genai.GenerativeModel('gemini-2.0-flash')
 
+# Generate content
+response = model.generate_content("Tell me a story about a brave knight.")
 print(response.text)
+
