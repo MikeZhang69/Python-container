@@ -12,5 +12,14 @@ services:
     network_mode: host
     command: >
       sh -c "Xvfb :99 -screen 0 1280x720x24 & 
-             x11vnc -display :99 -forever -nopw &
-             google-chrome --no-sandbox --disable-gpu"
+             x11vnc -display :99 -forever -nopw -rfbport 5900 -verbose &
+             google-chrome --no-sandbox --disable-gpu --disable-dev-shm-usage"
+  novnc:
+    image: theasp/novnc:latest
+    ports:
+      - "6080:6080"
+    environment:
+      - DISPLAY=:99
+      - RESOLUTION=1280x720
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
