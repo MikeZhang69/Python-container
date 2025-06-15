@@ -3,7 +3,7 @@ services:
   chrome:
     image: chrome-docker
     build:
-      context: .
+      context: ./.devcontainer
       dockerfile: Dockerfile.chrome
     environment:
       - DISPLAY=:99
