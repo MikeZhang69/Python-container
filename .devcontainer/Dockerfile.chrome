@@ -25,6 +25,8 @@ RUN apt-get update && apt-get install -y \
     sudo \
     git \
     curl \
+    fonts-wqy-zenhei \
+    fonts-noto-cjk \
     && ln -fs /usr/share/zoneinfo/UTC /etc/localtime \
     && dpkg-reconfigure -f noninteractive tzdata \
     && apt-get clean \
