@@ -31,6 +31,7 @@ RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip \
     docker.io \
+    dbus-x11 \
     && ln -fs /usr/share/zoneinfo/UTC /etc/localtime \
     && dpkg-reconfigure -f noninteractive tzdata \
     && apt-get clean \
@@ -41,7 +42,7 @@ RUN curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-c
     && chmod +x /usr/local/bin/docker-compose \
     && ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
-# Install websocket-client for clipboard relay
+# Install websocket-client for potential future use
 RUN pip3 install websocket-client
 
 RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
@@ -51,5 +52,5 @@ RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
-COPY clipboard_relay.py /app/clipboard_relay.py
+COPY clipboard.txt /app/clipboard.txt
 CMD ["bash"]
