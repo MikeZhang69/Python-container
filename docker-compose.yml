@@ -14,8 +14,9 @@ services:
     network_mode: host
     command: >
       sh -c "mkdir -p /var/run/dbus && Xvfb :99 -screen 0 1280x720x24 -nolisten tcp & 
-             sleep 2 && x11vnc -display :99 -forever -nopw -rfbport 5900 -verbose -shared -ncache -logfile /tmp/x11vnc.log &
-             google-chrome --no-sandbox --disable-gpu --disable-software-rasterizer --disable-dev-shm-usage --disable-accelerated-2d-canvas --disable-accelerated-jpeg-decoding --disable-accelerated-mjpeg-decode --disable-accelerated-video-decode --no-first-run --window-size=1280,720"
+             sleep 2 && x11vnc -display :99 -forever -nopw -rfbport 5900 -verbose -shared -logfile /tmp/x11vnc.log &
+             google-chrome --no-sandbox --disable-gpu --disable-software-rasterizer --disable-dev-shm-usage --disable-accelerated-2d-canvas --disable-accelerated-jpeg-decoding --disable-accelerated-mjpeg-decode --disable-accelerated-video-decode --no-first-run --window-size=1280,720 &
+             python3 /app/clipboard_relay.py"
     shm_size: '512m'
   novnc:
     image: theasp/novnc:latest
